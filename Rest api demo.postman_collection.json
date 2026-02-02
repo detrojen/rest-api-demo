@@ -1,0 +1,533 @@
+{
+  "info": {
+    "_postman_id": "2329a757-5716-4178-baf1-b52e9a5c74f4",
+    "name": "Rest api demo",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "52036509",
+    "_collection_link": "https://go.postman.co/collection/52036509-2329a757-5716-4178-baf1-b52e9a5c74f4?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "gett all employees",
+      "request": {
+        "method": "GET",
+        "header": []
+      },
+      "response": [
+        {
+          "name": "New Request",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/v1/employees",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "v1",
+                "employees"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Transfer-Encoding",
+              "value": "chunked"
+            },
+            {
+              "key": "Date",
+              "value": "Mon, 02 Feb 2026 17:21:55 GMT"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=60"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            }
+          ],
+          "cookie": [],
+          "body": "[\n    {\n        \"id\": 15,\n        \"firstName\": \"jenish --- \",\n        \"lastName\": \"detroja\",\n        \"dob\": \"2026-02-02T12:47:04.058+00:00\",\n        \"baseSalary\": 10,\n        \"email\": \"jen@gmail.com\",\n        \"password\": \"asdfgh\",\n        \"profileImg\": \"profileImgs\\\\demo.png\",\n        \"department\": {\n            \"id\": 2,\n            \"departmentName\": \"Account\"\n        }\n    }\n]"
+        }
+      ]
+    },
+    {
+      "name": "employee by id",
+      "request": {
+        "method": "GET",
+        "header": []
+      },
+      "response": [
+        {
+          "name": "employee by id",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/v1/employees/15",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "v1",
+                "employees",
+                "15"
+              ]
+            }
+          },
+          "status": "Internal Server Error",
+          "code": 500,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Transfer-Encoding",
+              "value": "chunked"
+            },
+            {
+              "key": "Date",
+              "value": "Mon, 02 Feb 2026 17:22:58 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "close"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"timestamp\": \"2026-02-02T17:22:58.966+00:00\",\n    \"status\": 500,\n    \"error\": \"Internal Server Error\",\n    \"path\": \"/v1/employees/15\"\n}"
+        },
+        {
+          "name": "employee by id",
+          "originalRequest": {
+            "method": "GET",
+            "header": []
+          },
+          "_postman_previewlanguage": null,
+          "header": null,
+          "cookie": [],
+          "body": null
+        }
+      ]
+    },
+    {
+      "name": "create employee",
+      "request": {
+        "method": "GET",
+        "header": []
+      },
+      "response": [
+        {
+          "name": "employee",
+          "originalRequest": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "employee",
+                  "value": "{\n  \"firstName\": \"jenish\",\n  \"lastName\": \"detroja\",\n  \"dob\": \"2026-02-02T12:47:04.058Z\",\n  \"baseSalary\": 10,\n  \"email\": \"jengmail.com\",\n  \"password\": \"asdfgh\",\n  \"profileImg\": \"\",\n  \"departmentId\": 1\n}",
+                  "type": "text",
+                  "uuid": "82b72246-d188-40bb-8e15-e9750f589654",
+                  "contentType": "application/json"
+                },
+                {
+                  "key": "profileImgFile",
+                  "type": "file",
+                  "uuid": "8afbf8b6-6ff2-4991-9f3d-87dfdfabc95b",
+                  "src": "/C:/Users/detrojen/Pictures/Screenshots/demo.png"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{base_url}}/v2/employees",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "v2",
+                "employees"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Transfer-Encoding",
+              "value": "chunked"
+            },
+            {
+              "key": "Date",
+              "value": "Mon, 02 Feb 2026 17:30:32 GMT"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=60"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"id\": 10008,\n    \"firstName\": \"jenish\",\n    \"lastName\": \"detroja\",\n    \"dob\": \"2026-02-02T12:47:04.058+00:00\",\n    \"baseSalary\": 10,\n    \"email\": \"jengmail.com\",\n    \"password\": \"asdfgh\",\n    \"profileImg\": \"profileImgs\\\\demo.png\",\n    \"department\": {\n        \"id\": 1,\n        \"departmentName\": \"Sales\"\n    }\n}"
+        },
+        {
+          "name": "employee",
+          "originalRequest": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "employee",
+                  "value": "{\n  \"firstName\": \"jenish\",\n  \"lastName\": \"detroja\",\n  \"dob\": \"2026-02-02T12:47:04.058Z\",\n  \"baseSalary\": 10,\n  \"email\": \"jengmail.com\",\n  \"password\": \"asdfgh\",\n  \"profileImg\": \"\",\n  \"departmentId\": 1\n}",
+                  "type": "text",
+                  "uuid": "82b72246-d188-40bb-8e15-e9750f589654",
+                  "contentType": "application/json"
+                },
+                {
+                  "key": "profileImgFile",
+                  "type": "file",
+                  "uuid": "8afbf8b6-6ff2-4991-9f3d-87dfdfabc95b",
+                  "src": "/C:/Users/detrojen/Pictures/Screenshots/demo.png"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{base_url}}/v2/employees",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "v2",
+                "employees"
+              ]
+            }
+          },
+          "status": "Bad Request",
+          "code": 400,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Transfer-Encoding",
+              "value": "chunked"
+            },
+            {
+              "key": "Date",
+              "value": "Mon, 02 Feb 2026 17:32:19 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "close"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"timestamp\": \"2026-02-02T17:32:19.778+00:00\",\n    \"status\": 400,\n    \"error\": \"Bad Request\",\n    \"path\": \"/v2/employees\"\n}"
+        }
+      ]
+    },
+    {
+      "name": "update employee version 1",
+      "request": {
+        "method": "GET",
+        "header": []
+      },
+      "response": [
+        {
+          "name": "New Request",
+          "originalRequest": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"firstName\": \"jenish 0000\",\r\n  \"lastName\": \"detroja\",\r\n  \"dob\": \"2026-02-02T12:47:04.058Z\",\r\n  \"baseSalary\": 10,\r\n  \"email\": \"jen@gmail.com\",\r\n  \"password\": \"asdfgh\",\r\n  \"profileImg\": \"\",\r\n  \"departmentId\": 2\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/employees/10008?version=1",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "employees",
+                "10008"
+              ],
+              "query": [
+                {
+                  "key": "version",
+                  "value": "1"
+                }
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Transfer-Encoding",
+              "value": "chunked"
+            },
+            {
+              "key": "Date",
+              "value": "Mon, 02 Feb 2026 17:34:58 GMT"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=60"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"id\": 10008,\n    \"firstName\": \"jenish 0000\",\n    \"lastName\": \"detroja\",\n    \"dob\": \"2026-02-02T12:47:04.058+00:00\",\n    \"baseSalary\": 10,\n    \"email\": \"jen@gmail.com\",\n    \"password\": \"asdfgh\",\n    \"profileImg\": \"\",\n    \"department\": {\n        \"id\": 2,\n        \"departmentName\": \"Account\"\n    }\n}"
+        }
+      ]
+    },
+    {
+      "name": "update employee version 1",
+      "request": {
+        "method": "GET",
+        "header": []
+      },
+      "response": [
+        {
+          "name": "update employee version 1",
+          "originalRequest": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"firstName\": \"jenish 0000\",\r\n  \"lastName\": \"\",\r\n  \"dob\": \"2026-02-02T12:47:04.058Z\",\r\n  \"baseSalary\": 10,\r\n  \"email\": \"je\",\r\n  \"password\": \"asdfgh\",\r\n  \"profileImg\": \"\",\r\n  \"departmentId\": 2\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/employees/10008?version=1",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "employees",
+                "10008"
+              ],
+              "query": [
+                {
+                  "key": "version",
+                  "value": "1"
+                }
+              ]
+            }
+          },
+          "status": "Bad Request",
+          "code": 400,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Transfer-Encoding",
+              "value": "chunked"
+            },
+            {
+              "key": "Date",
+              "value": "Mon, 02 Feb 2026 18:05:04 GMT"
+            },
+            {
+              "key": "Connection",
+              "value": "close"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"timestamp\": \"2026-02-02T23:35:04.2047172\",\n    \"status\": 400,\n    \"errors\": [\n        {\n            \"field\": \"email\",\n            \"message\": \"must be a well-formed email address\"\n        }\n    ]\n}"
+        }
+      ]
+    },
+    {
+      "name": "update department only",
+      "request": {
+        "method": "GET",
+        "header": []
+      },
+      "response": [
+        {
+          "name": "update department only",
+          "originalRequest": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "X-API-VERSION",
+                "value": "1",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"departmentId\":4\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/employees/15/update-department",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "employees",
+                "15",
+                "update-department"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Transfer-Encoding",
+              "value": "chunked"
+            },
+            {
+              "key": "Date",
+              "value": "Mon, 02 Feb 2026 18:08:23 GMT"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=60"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"id\": 15,\n    \"firstName\": \"jenish --- \",\n    \"lastName\": \"detroja\",\n    \"dob\": \"2026-02-02T12:47:04.058+00:00\",\n    \"baseSalary\": 10,\n    \"email\": \"jen@gmail.com\",\n    \"password\": \"asdfgh\",\n    \"profileImg\": \"profileImgs\\\\demo.png\",\n    \"department\": {\n        \"id\": 4,\n        \"departmentName\": \"Admin\"\n    }\n}"
+        }
+      ]
+    },
+    {
+      "name": "New Request",
+      "request": {
+        "method": "GET",
+        "header": []
+      },
+      "response": [
+        {
+          "name": "New Request",
+          "originalRequest": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "profileImgFile",
+                  "type": "file",
+                  "uuid": "ec69d646-3425-4b1d-aa7e-d8a198d3e8ed",
+                  "src": "/C:/Users/detrojen/Pictures/Screenshots/Screenshot 2026-01-19 190653.png"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{base_url}}/v1/employees/15/profile-img",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "v1",
+                "employees",
+                "15",
+                "profile-img"
+              ]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": null,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "Transfer-Encoding",
+              "value": "chunked"
+            },
+            {
+              "key": "Date",
+              "value": "Mon, 02 Feb 2026 18:09:56 GMT"
+            },
+            {
+              "key": "Keep-Alive",
+              "value": "timeout=60"
+            },
+            {
+              "key": "Connection",
+              "value": "keep-alive"
+            }
+          ],
+          "cookie": [],
+          "body": "{\n    \"id\": 15,\n    \"firstName\": \"jenish --- \",\n    \"lastName\": \"detroja\",\n    \"dob\": \"2026-02-02T12:47:04.058+00:00\",\n    \"baseSalary\": 10,\n    \"email\": \"jen@gmail.com\",\n    \"password\": \"asdfgh\",\n    \"profileImg\": \"profileImgs\\\\Screenshot 2026-01-19 190653.png\",\n    \"department\": {\n        \"id\": 4,\n        \"departmentName\": \"Admin\"\n    }\n}"
+        }
+      ]
+    }
+  ]
+}

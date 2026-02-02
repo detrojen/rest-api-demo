@@ -28,7 +28,11 @@ public class EmployeeService {
     }
 
     public Employee getEmployeeById(Long id){
-        return employeeRepository.findById(id).orElse(null);
+        Employee employee = employeeRepository.findById(id).orElse(null);
+        if(employee == null){
+            throw new EmployeeNotFound();
+        }
+        return employee;
     }
 
     public Employee updateEmployeeDepartment(Long employeeId, UpdateEmployeeDepartmentRequestDTO reqDTO){

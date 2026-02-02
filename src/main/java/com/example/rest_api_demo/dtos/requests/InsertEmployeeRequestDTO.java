@@ -1,24 +1,39 @@
 package com.example.rest_api_demo.dtos.requests;
 
+import com.example.rest_api_demo.dtos.markers.OnCreate;
+import com.example.rest_api_demo.dtos.markers.OnUpdate;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Past;
+import jakarta.validation.constraints.Positive;
+import org.aspectj.lang.annotation.RequiredTypes;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Date;
 
 public class InsertEmployeeRequestDTO {
+    @NotBlank(message = "first name is required")
     private String firstName;
 
+    @NotBlank(message = "last name is required")
     private String lastName;
 
+    @Past
     private Date dob;
 
+    @Positive
     private int baseSalary;
 
+    @Email( groups = {OnCreate.class, OnUpdate.class})
     private String email;
 
+    @NotBlank(message = "password is required")
     private String password;
+
 
     private String profileImg;
 
+    @Positive
     private Long departmentId;
 
 

@@ -1,11 +1,15 @@
 package com.example.rest_api_demo.controllers;
 
+import com.example.rest_api_demo.dtos.markers.OnCreate;
+import com.example.rest_api_demo.dtos.markers.OnUpdate;
 import com.example.rest_api_demo.dtos.requests.InsertEmployeeRequestDTO;
 import com.example.rest_api_demo.dtos.requests.UpdateEmployeeDepartmentRequestDTO;
 import com.example.rest_api_demo.entities.Employee;
 import com.example.rest_api_demo.services.EmployeeService;
 import com.example.rest_api_demo.utils.FileHandler;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -24,8 +28,7 @@ public class EmployeeController {
     }
 
     @PostMapping(path = "/v1/employees")
-    
-    public Employee InsertEmployee(  @RequestPart InsertEmployeeRequestDTO employee, @RequestPart MultipartFile profileImgFile){
+    public Employee InsertEmployee(  @RequestPart  InsertEmployeeRequestDTO employee, @RequestPart MultipartFile profileImgFile){
         System.out.println("uri versoning:- v1 called ");
         String filePath = FileHandler.Save(profileImgFile,"profileImgs");
         employee.setProfileImg(filePath);
@@ -33,7 +36,7 @@ public class EmployeeController {
     }
 
     @PostMapping(path = "/v2/employees")
-    public Employee InsertEmployeeV2(  @RequestPart InsertEmployeeRequestDTO employee, @RequestPart MultipartFile profileImgFile){
+    public Employee InsertEmployeeV2(@RequestPart InsertEmployeeRequestDTO employee, @RequestPart MultipartFile profileImgFile){
         System.out.println("uri versoning:- v2 called ");
         String filePath = FileHandler.Save(profileImgFile,"profileImgs");
         employee.setProfileImg(filePath);
@@ -41,7 +44,7 @@ public class EmployeeController {
     }
 
     @PutMapping(value = "/employees/{employeeId}" ,params = "version=1")
-    public Employee updateEmployee(@PathVariable Long employeeId, @RequestBody InsertEmployeeRequestDTO employee){
+    public Employee updateEmployee(@PathVariable Long employeeId,   @Validated(OnCreate.class) @RequestBody InsertEmployeeRequestDTO employee){
         System.out.println("param versoning : v1 called ");
         return employeeService.updateEmployee(employeeId,employee);
     }
@@ -71,7 +74,7 @@ public class EmployeeController {
     }
 
     @GetMapping("/v1/employees/{employeeId}")
-    public Employee  getAll(Long employeeId){
+    public Employee  getAll(@PathVariable Long employeeId){
         return employeeService.getEmployeeById(employeeId);
     }
 
