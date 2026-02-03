@@ -62,7 +62,7 @@ public class EmployeeController {
                     @ApiResponse(responseCode ="500",description = "internal server error")
             }
     )
-    public Employee InsertEmployeeV2(@RequestPart InsertEmployeeRequestDTO employee, @RequestPart MultipartFile profileImgFile){
+    public Employee InsertEmployeeV2(@Validated(OnCreate.class)@RequestPart InsertEmployeeRequestDTO employee, @RequestPart MultipartFile profileImgFile){
         System.out.println("uri versoning:- v2 called ");
         String filePath = FileHandler.Save(profileImgFile,"profileImgs");
         employee.setProfileImg(filePath);
@@ -78,7 +78,7 @@ public class EmployeeController {
                     @ApiResponse(responseCode ="500",description = "internal server error")
             }
     )
-    public Employee updateEmployee(@PathVariable Long employeeId,   @Validated(OnCreate.class) @RequestBody InsertEmployeeRequestDTO employee){
+    public Employee updateEmployee(@PathVariable Long employeeId,   @Validated(OnUpdate.class) @RequestBody InsertEmployeeRequestDTO employee){
         System.out.println("param versoning : v1 called ");
         return employeeService.updateEmployee(employeeId,employee);
     }
@@ -92,7 +92,7 @@ public class EmployeeController {
                     @ApiResponse(responseCode ="500",description = "internal server error")
             }
     )
-    public Employee updateEmployeeV2(@PathVariable Long employeeId, @RequestBody InsertEmployeeRequestDTO employee){
+    public Employee updateEmployeeV2(@PathVariable Long employeeId, @Valid @RequestBody InsertEmployeeRequestDTO employee){
         System.out.println("param versoning : v2 called ");
         return employeeService.updateEmployee(employeeId,employee);
     }
@@ -106,7 +106,7 @@ public class EmployeeController {
                     @ApiResponse(responseCode ="500",description = "internal server error")
             }
     )
-    public Employee updateDepartmentOnly(@PathVariable Long employeeId, @RequestBody UpdateEmployeeDepartmentRequestDTO reqDTO){
+    public Employee updateDepartmentOnly(@PathVariable Long employeeId, @Validated(OnUpdate.class) @RequestBody UpdateEmployeeDepartmentRequestDTO reqDTO){
         System.out.println("HEADER versoning : v1 called ");
         return employeeService.updateEmployeeDepartment(employeeId,reqDTO);
     }

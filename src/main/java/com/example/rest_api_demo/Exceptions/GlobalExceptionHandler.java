@@ -1,6 +1,7 @@
 package com.example.rest_api_demo.Exceptions;
 
 import com.example.rest_api_demo.dtos.responses.ErrorResponseDTO;
+import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -32,6 +33,12 @@ public class GlobalExceptionHandler {
                 .map(err -> Map.of("field", err.getField(), "message", err.getDefaultMessage()))
                 .toList());
         return ResponseEntity.badRequest().body(errors);
+    }
+
+    @ExceptionHandler(Exception.class)
+
+    public ResponseEntity<?> handleExcpetionResolver(Exception e){
+        return ResponseEntity.badRequest().build();
     }
 
 

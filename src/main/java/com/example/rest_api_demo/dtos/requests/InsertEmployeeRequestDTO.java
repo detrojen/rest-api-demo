@@ -6,6 +6,7 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Past;
 import jakarta.validation.constraints.Positive;
+import jakarta.validation.groups.Default;
 import org.aspectj.lang.annotation.RequiredTypes;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -24,7 +25,7 @@ public class InsertEmployeeRequestDTO {
     @Positive
     private int baseSalary;
 
-    @Email( groups = {OnCreate.class, OnUpdate.class})
+    @Email( groups = {OnCreate.class, OnUpdate.class, Default.class})
     private String email;
 
     @NotBlank(message = "password is required")
