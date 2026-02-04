@@ -10,6 +10,7 @@ import com.example.rest_api_demo.utils.FileHandler;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import jakarta.validation.Valid;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.http.CacheControl;
@@ -22,7 +23,6 @@ import org.springframework.web.context.request.ServletWebRequest;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -30,8 +30,9 @@ import java.util.concurrent.TimeUnit;
 @RestController
 public class EmployeeController {
 
+    private static final org.slf4j.Logger log = LoggerFactory.getLogger(EmployeeController.class);
     private final EmployeeService employeeService;
-
+    private static final String profileImgFolder = "profileImgs";
     @Autowired
     EmployeeController(EmployeeService employeeService){
         this.employeeService = employeeService;
@@ -46,9 +47,9 @@ public class EmployeeController {
             }
     )
     @PostMapping(path = "/v1/employees")
-    public Employee InsertEmployee(  @RequestPart  InsertEmployeeRequestDTO employee, @RequestPart MultipartFile profileImgFile){
-        System.out.println("uri versoning:- v1 called ");
-        String filePath = FileHandler.Save(profileImgFile,"profileImgs");
+    public Employee insertEmployee( @Valid @RequestPart  InsertEmployeeRequestDTO employee, @RequestPart MultipartFile profileImgFile){
+        log.info("uri versoning:- v1 called ");
+        String filePath = FileHandler.Save(profileImgFile,profileImgFolder);
         employee.setProfileImg(filePath);
         return employeeService.insertEmployee(employee);
     }
@@ -62,9 +63,9 @@ public class EmployeeController {
                     @ApiResponse(responseCode ="500",description = "internal server error")
             }
     )
-    public Employee InsertEmployeeV2(@Validated(OnCreate.class)@RequestPart InsertEmployeeRequestDTO employee, @RequestPart MultipartFile profileImgFile){
-        System.out.println("uri versoning:- v2 called ");
-        String filePath = FileHandler.Save(profileImgFile,"profileImgs");
+    public Employee insertEmployeeV2(@Validated(OnCreate.class)@RequestPart InsertEmployeeRequestDTO employee, @RequestPart MultipartFile profileImgFile){
+        log.info("uri versoning:- v2 called ");
+        String filePath = FileHandler.Save(profileImgFile,profileImgFolder);
         employee.setProfileImg(filePath);
         return employeeService.insertEmployee(employee);
     }
@@ -79,7 +80,7 @@ public class EmployeeController {
             }
     )
     public Employee updateEmployee(@PathVariable Long employeeId,   @Validated(OnUpdate.class) @RequestBody InsertEmployeeRequestDTO employee){
-        System.out.println("param versoning : v1 called ");
+        log.info("param versoning : v1 called ");
         return employeeService.updateEmployee(employeeId,employee);
     }
 
@@ -93,7 +94,7 @@ public class EmployeeController {
             }
     )
     public Employee updateEmployeeV2(@PathVariable Long employeeId, @Valid @RequestBody InsertEmployeeRequestDTO employee){
-        System.out.println("param versoning : v2 called ");
+        log.info("param versoning : v2 called ");
         return employeeService.updateEmployee(employeeId,employee);
     }
 
@@ -107,7 +108,7 @@ public class EmployeeController {
             }
     )
     public Employee updateDepartmentOnly(@PathVariable Long employeeId, @Validated(OnUpdate.class) @RequestBody UpdateEmployeeDepartmentRequestDTO reqDTO){
-        System.out.println("HEADER versoning : v1 called ");
+        log.info("HEADER versoning : v1 called ");
         return employeeService.updateEmployeeDepartment(employeeId,reqDTO);
     }
 
@@ -121,9 +122,9 @@ public class EmployeeController {
             }
     )
     public Employee changeProfileImg(@PathVariable Long employeeId, @RequestPart MultipartFile profileImgFile){
-        String imgPath = FileHandler.Save(profileImgFile,"profileImgs");
-        Employee employee = employeeService.updateProfileImg(employeeId,imgPath);
-        return employee;
+        String imgPath = FileHandler.Save(profileImgFile,profileImgFolder);
+        return employeeService.updateProfileImg(employeeId,imgPath);
+
     }
 
     @GetMapping("/v1/employees")
@@ -149,7 +150,7 @@ public class EmployeeController {
 
     @GetMapping("/v1/employees/profile-img/{imgName}")
     public ResponseEntity<Resource> getProfileImg(@PathVariable String imgName, ServletWebRequest request) throws IOException {
-        Resource file = FileHandler.Get("profileImgs",imgName);
+        Resource file = FileHandler.Get(profileImgFolder,imgName);
         long lastModified = file.lastModified();
         if(request.checkNotModified(lastModified)){
             return ResponseEntity.status(HttpStatus.NOT_MODIFIED).build();
@@ -160,6 +161,11 @@ public class EmployeeController {
                 .lastModified(lastModified)
                 .body(file);
 
+    }
+
+    @DeleteMapping("/v1/employee/{employeeId}")
+    public Employee delete(@PathVariable Long employeeId){
+        return employeeService.deleteById(employeeId);
     }
 
 }

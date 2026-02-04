@@ -25,7 +25,7 @@ public class InsertEmployeeRequestDTO {
     @Positive
     private int baseSalary;
 
-    @Email( groups = {OnCreate.class, OnUpdate.class, Default.class})
+    @Email( groups = { OnUpdate.class})
     private String email;
 
     @NotBlank(message = "password is required")

@@ -74,5 +74,14 @@ public class EmployeeService {
         return employeeRepository.save(employee);
     }
 
+    public Employee deleteById(Long id){
+        Employee employee = employeeRepository.findById(id).orElse(null);
+        if(employee == null){
+            throw  new EmployeeNotFound();
+        }
+        employeeRepository.deleteById(id);
+        return employee;
+    }
+
 
 }
